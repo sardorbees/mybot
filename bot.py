@@ -62,14 +62,10 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_first_name = update.effective_user.first_name
     keyboard = [["📨 Отправить заявку", "ℹ️ О компании"]]
 
-    reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
-
-    await update.message.reply_text(
-        f"👋 Привет, {user_first_name}!\n\n"
-        "Добро пожаловать в наш Ali-Company Bot.\n\n"
-        "🟢 Для начала работы нажми кнопку ниже или введи команду /start ещё раз.\n\n"
-        "⏳ Загрузка о нас...",
-        reply_markup=reply_markup
+    await update.message.reply_text("👋 Привет, {user_first_name}!\n\n", 
+    "Добро пожаловать в наш Ali-Company Bot.\n\n",         
+    "🟢 Для начала работы нажми кнопку ниже или введи команду /start ещё раз.\n\n"
+    "⏳ Загрузка о нас..."
     )
 
     # Эмуляция загрузки
@@ -97,15 +93,6 @@ async def main_menu(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         reply_markup=reply_markup
     )
     return START
-
-ABOUT_TEXT = (
-    "🏢 <b>О нашей компании</b>\n\n"
-    "🔹 Мы — команда профессиональных разработчиков сайтов.\n"
-    "🔹 Делаем адаптивные, быстрые и безопасные веб-решения под ключ.\n"
-    "🔹 Уникальный дизайн, простая админ-панель, бесплатный хостинг на 6 месяцев.\n"
-    "🔹 Работаем с любыми нишами: образование, бизнес, туризм и т.д.\n\n"
-    "Свяжитесь с нами — и ваш сайт будет лучшим! 💼"
-)
 
 async def about_us(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text(ABOUT_TEXT, parse_mode="HTML")
@@ -218,7 +205,7 @@ app.add_handler(MessageHandler(filters.Regex("^(📦 О нас)$"), about_us))
 app.add_handler(CommandHandler("request", request))
 
 def main():
-    app = ApplicationBuilder().token(BOT_TOKEN).build()
+    app = ApplicationBuilder().token(TOKEN).build()
 
     conv = ConversationHandler(
         entry_points=[CommandHandler("start", start)],
@@ -234,7 +221,7 @@ def main():
     )
 
     app.add_handler(conv)
-    app.add_handler(CommandHandler("export", export_applications))
+    app.add_handler(CommandHandler("start", start))
 
     print("✅ Бот запущен")
     app.run_polling()
