@@ -5,9 +5,6 @@ from telegram.ext import (
     ApplicationBuilder, CommandHandler, MessageHandler,
     ContextTypes, ConversationHandler, filters,
 )
-from telegram.ext import Updater
-updater = Updater(token=TOKEN)
-
 
 TOKEN = "your_bot_token_here"
 from db import init_db, save_application
