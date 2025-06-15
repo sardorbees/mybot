@@ -6,7 +6,10 @@ from telegram.ext import (
     ContextTypes, ConversationHandler, filters,
 )
 from telegram.ext import Updater
+updater = Updater(token=TOKEN)
 
+
+TOKEN = "your_bot_token_here"
 from db import init_db, save_application
 from export import export_to_excel
 import asyncio
@@ -14,7 +17,6 @@ import asyncio
 load_dotenv()
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 ADMIN_ID = int(os.getenv("ADMIN_ID"))
-updater = Updater(token=TOKEN)
 
 # Состояния
 SITE_TYPE, PACKAGE, PRICE, NAME, PHONE, COMMENT = range(6)
