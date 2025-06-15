@@ -5,6 +5,7 @@ from telegram.ext import (
     ApplicationBuilder, CommandHandler, MessageHandler,
     ContextTypes, ConversationHandler, filters,
 )
+from telegram.ext import Updater
 
 from db import init_db, save_application
 from export import export_to_excel
@@ -13,6 +14,7 @@ import asyncio
 load_dotenv()
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 ADMIN_ID = int(os.getenv("ADMIN_ID"))
+updater = Updater(token=TOKEN)
 
 # Состояния
 SITE_TYPE, PACKAGE, PRICE, NAME, PHONE, COMMENT = range(6)
